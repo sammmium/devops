@@ -1,0 +1,15 @@
+version: "3.7"
+
+networks:
+    devops_network:
+        driver: bridge
+
+services:
+    devops_ubuntu_cron:
+        build: .
+        container_name: ${CONTAINER_NAME}
+        restart: always
+        ports:
+            - "${PORT_OUT}:${PORT_IN}"
+        networks:
+            - ${NETWORK_NAME}
