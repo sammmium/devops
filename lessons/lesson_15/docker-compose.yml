@@ -1,0 +1,26 @@
+version: "3.7"
+
+networks:
+    lesson-15-network:
+        driver: bridge
+
+services:
+    gateway:
+        build:
+            context: gateway/nginx
+        container_name: lesson-15-gateway
+        ports:
+            - "80:8080"
+        depends_on:
+            - frontend
+        networks:
+            - lesson-15-network
+        
+    frontend:
+        build:
+            context: frontend/nginx
+        container_name: lesson-15-front
+        volumes:
+            - ./frontend:/app
+        networks:
+            - lesson-15-network
